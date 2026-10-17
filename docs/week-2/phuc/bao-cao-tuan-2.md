@@ -135,3 +135,12 @@ Sơ đồ thể hiện cấu hình đã triển khai và kiểm thử tuần 2: 
 
 - Chưa bàn giao trực tiếp thông tin kết nối cho Linh. Thông tin database đã được chuẩn bị trong Secrets Manager; image và các cấu hình triển khai đã có trên tài khoản nhóm.
 - Cloud Map chưa triển khai do giới hạn quyền Learner Lab. Phần gọi REST nội bộ đã kiểm thử bằng private DNS Route 53; việc tự động cập nhật DNS khi task đổi IP chưa hoàn thiện. Tệp `resume-lab.py` kèm minh chứng cập nhật IP khi khởi động lại môi trường.
+
+## Kế hoạch tuần 3
+
+1. **Hoàn tất bàn giao thông tin kết nối qua Secrets Manager:** Tích hợp đọc biến môi trường cấu hình kết nối database, SNS topic và SQS queue từ AWS Secrets Manager vào ECS Task Definition để tăng cường bảo mật.
+2. **Triển khai Cloud Map hoặc giải pháp Service Discovery thay thế:** Tối ưu hóa cơ chế định tuyến nội bộ trong môi trường AWS Academy Learner Lab (hoàn thiện kịch bản cập nhật Route 53 Private Hosted Zone hoặc ECS Service Connect).
+3. **Thiết lập chính sách Auto Scaling cho các dịch vụ:** Cấu hình Target Tracking Scaling Policy cho cả 3 microservices trên ECS Fargate dựa theo CPU Utilization và Request Count của ALB.
+4. **Bổ sung kiểm thử tự động các luồng lỗi:** Kiểm thử kịch bản timeout khi gọi REST nội bộ, mô phỏng cơ chế retry/chặn lỗi và kiểm thử việc đẩy tin nhắn lỗi sang Dead Letter Queue (DLQ).
+5. **Chuẩn bị nội dung báo cáo tổng kết:** Thu thập số liệu vận hành, tổng kết kiến trúc hệ thống và chuẩn bị slide, video demo phục vụ nghiệm thu đồ án.
+

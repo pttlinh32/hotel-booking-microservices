@@ -292,3 +292,19 @@ Tuân thủ nghiêm ngặt quy định học phần về việc sử dụng trí
   - Hỗ trợ rà soát cấu trúc báo cáo và kiểm tra tính nhất quán với bản đặc tả kiến trúc.
 - **Tính độc lập của sinh viên:**
   - Toàn bộ mã nguồn nghiệp vụ, mô hình dữ liệu JPA, cấu trúc sự kiện JSON, quy trình xử lý lỗi và kịch bản kiểm thử thực tế trên Postman/ALB đều do sinh viên tự tay lập trình, biên dịch và kiểm chứng thực nghiệm.
+
+---
+
+## 8. Kế hoạch Tuần 3
+
+1. **Hoàn tất bàn giao thông tin kết nối qua AWS Secrets Manager:**
+   - Cập nhật mã nguồn và cấu hình Spring Boot để đọc chuỗi kết nối Database, SNS Topic ARN, SQS Queue URL an toàn từ biến môi trường được inject từ Secrets Manager.
+2. **Triển khai Cloud Map hoặc giải pháp Service Discovery thay thế:**
+   - Hoàn thiện tích hợp gọi REST nội bộ với service discovery, tự động phân giải endpoint khi task container được scale hoặc khởi động lại trong Learner Lab.
+3. **Cấu hình Auto Scaling Policy cho 3 microservices:**
+   - Thiết lập các ngưỡng Target Tracking Scaling trên ECS Service để thích ứng với lưu lượng tải biến động.
+4. **Bổ sung kiểm thử tự động các kịch bản ngoại lệ:**
+   - Bổ sung integration test mô phỏng timeout kết nối, ngắt kết nối tạm thời giữa các microservices và kiểm thử tự động đẩy thông điệp lỗi vào DLQ.
+5. **Chuẩn bị nội dung báo cáo tổng kết đồ án:**
+   - Tổng hợp kết quả kiểm thử toàn diện, hoàn thiện tài liệu hướng dẫn kỹ thuật và video demo hoàn chỉnh cho buổi nghiệm thu đồ án.
+

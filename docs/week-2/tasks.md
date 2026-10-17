@@ -166,3 +166,28 @@
    - [x] Ảnh 14: Dữ liệu được ghi thành công vào RDS bảng `rooms` và `bookings`.
    - [x] Ảnh 15: Dữ liệu Audit Trail được ghi vào DynamoDB.
    - [x] Ảnh 16: Log của `notification-service` tiêu thụ message từ SQS và in ra log xác nhận gửi email.
+
+---
+
+## 🚀 KẾ HOẠCH DỰ KIẾN CHO TUẦN 3
+
+Dựa trên kết quả triển khai hạ tầng và backend cốt lõi ở Tuần 2, nhóm đề ra 5 mục tiêu trọng tâm cho Tuần 3:
+
+1. **Hoàn tất bàn giao thông tin kết nối qua AWS Secrets Manager:**
+   - Đưa toàn bộ chuỗi kết nối database (RDS Endpoint, credentials của `room_user` và `booking_user`), SNS Topic ARN, SQS Queue URL vào AWS Secrets Manager.
+   - Cấu hình ECS Task Definitions tự động nạp biến môi trường từ Secrets Manager (`secrets` block) thay vì truyền plaintext qua `environment`.
+
+2. **Triển khai giải pháp Service Discovery / Cloud Map trong giới hạn Learner Lab:**
+   - Đánh giá khả năng áp dụng AWS Cloud Map kết hợp ECS Service Connect hoặc hoàn thiện giải pháp Route 53 Private Hosted Zone (`hotel.local`) tự động cập nhật bản ghi khi container tái khởi động hoặc đổi IP nội bộ.
+
+3. **Cấu hình chính sách tự động mở rộng (Auto Scaling Policy):**
+   - Thiết lập Target Tracking Scaling Policy cho 3 ECS Services dựa trên CPU Utilization (> 70%) và Request Count per Target của ALB.
+   - Thử nghiệm scale out và scale in để đảm bảo tính sẵn sàng cao và tối ưu chi phí.
+
+4. **Bổ sung kiểm thử tự động cho các luồng xử lý lỗi và ngoại lệ:**
+   - Viết kịch bản kiểm thử lỗi timeout kết nối nội bộ giữa `booking-service` và `room-service` (mô phỏng Circuit Breaker / Retry).
+   - Kiểm thử tự động cơ chế đẩy message lỗi vào SQS Dead Letter Queue (DLQ) khi dữ liệu sự kiện bị sai định dạng.
+
+5. **Chuẩn bị và hoàn thiện nội dung báo cáo tổng kết đồ án:**
+   - Tổng hợp số liệu đo lường hiệu năng, chi phí vận hành trên Learner Lab.
+   - Soạn thảo tài liệu kiến trúc, hướng dẫn triển khai (Deployment Guide) và slide/video demo hoàn chỉnh cho buổi báo cáo tổng kết.
